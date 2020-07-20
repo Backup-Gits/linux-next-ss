@@ -68,4 +68,5 @@ void __init time_init(void)
 	lpj_fine = arch_timer_rate / HZ;
 
 	pv_time_init();
+	pv_state_init();
 }
