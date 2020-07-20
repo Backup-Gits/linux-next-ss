@@ -52,6 +52,9 @@ int kvm_hvc_call_handler(struct kvm_vcpu *vcpu)
 		case ARM_SMCCC_HV_PV_TIME_FEATURES:
 			val = SMCCC_RET_SUCCESS;
 			break;
+		case ARM_SMCCC_HV_PV_STATE_FEATURES:
+			val = SMCCC_RET_SUCCESS;
+			break;
 		}
 		break;
 	case ARM_SMCCC_HV_PV_TIME_FEATURES:
@@ -61,6 +64,14 @@ int kvm_hvc_call_handler(struct kvm_vcpu *vcpu)
 		gpa = kvm_init_stolen_time(vcpu);
 		if (gpa != GPA_INVALID)
 			val = gpa;
+		break;
+	case ARM_SMCCC_HV_PV_STATE_INIT:
+		if (kvm_init_vcpu_state(vcpu, smccc_get_arg1(vcpu)) == 0)
+			val = SMCCC_RET_SUCCESS;
+		break;
+	case ARM_SMCCC_HV_PV_STATE_RELEASE:
+		if (kvm_release_vcpu_state(vcpu) == 0)
+			val = SMCCC_RET_SUCCESS;
 		break;
 	default:
 		return kvm_psci_call(vcpu);
