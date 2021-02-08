@@ -135,3 +135,26 @@ and the height of rectangles obtained using ``V4L2_SEL_TGT_CROP`` and
 ``V4L2_SEL_TGT_COMPOSE`` targets. If these are not equal then the
 scaling is applied. The application can compute the scaling ratios using
 these values.
+
+Configuration of Region of Interest (ROI)
+=========================================
+
+The range of coordinates of the top left corner, width and height of
+areas that can be ROI is given by the ``V4L2_SEL_TGT_ROI_BOUNDS`` target.
+It is recommended for the driver developers to put the top/left corner
+at position ``(0,0)``. The rectangle's coordinates are in global sensor
+coordinates. The units are in pixels and independent of the field of view.
+They are not impacted by any cropping or scaling that is currently being
+used.
+
+The top left corner, width and height of the Region of Interest area
+currently being employed by the device is given by the
+``V4L2_SEL_TGT_ROI_CURRENT`` target. It uses the same coordinate system
+as ``V4L2_SEL_TGT_ROI_BOUNDS``.
+
+In order to change active ROI top left, width and height coordinates
+use ``V4L2_SEL_TGT_ROI`` target.
+
+Each capture device has a default ROI rectangle, given by the
+``V4L2_SEL_TGT_ROI_DEFAULT`` target. Drivers shall set the ROI rectangle
+to the default when the driver is first loaded, but not later.

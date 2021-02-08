@@ -69,3 +69,24 @@ of the two interfaces they are used.
 	modified by hardware.
       - Yes
       - No
+    * - ``V4L2_SEL_TGT_ROI_CURRENT``
+      - 0x0200
+      - Current Region of Interest rectangle.
+      - Yes
+      - No
+    * - ``V4L2_SEL_TGT_ROI_DEFAULT``
+      - 0x0201
+      - Suggested Region of Interest rectangle.
+      - Yes
+      - No
+    * - ``V4L2_SEL_TGT_ROI_BOUNDS``
+      - 0x0202
+      - Bounds of the Region of Interest rectangle. All valid ROI rectangles fit
+	inside the ROI bounds rectangle.
+      - Yes
+      - No
+    * - ``V4L2_SEL_TGT_ROI``
+      - 0x0203
+      - Sets the new Region of Interest rectangle.
+      - Yes
+      - No
