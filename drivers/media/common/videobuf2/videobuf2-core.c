@@ -768,6 +768,9 @@ int vb2_core_reqbufs(struct vb2_queue *q, enum vb2_memory memory,
 	unsigned int i;
 	int ret;
 
+	if (flags & V4L2_FLAG_MEMORY_NON_COHERENT)
+		coherent_mem = false;
+
 	if (q->streaming) {
 		dprintk(q, 1, "streaming active\n");
 		return -EBUSY;
@@ -910,6 +913,9 @@ int vb2_core_create_bufs(struct vb2_queue *q, enum vb2_memory memory,
 	unsigned plane_sizes[VB2_MAX_PLANES] = { };
 	bool coherent_mem = true;
 	int ret;
+
+	if (flags & V4L2_FLAG_MEMORY_NON_COHERENT)
+		coherent_mem = false;
 
 	if (q->num_buffers == VB2_MAX_FRAME) {
 		dprintk(q, 1, "maximum number of buffers already allocated\n");
